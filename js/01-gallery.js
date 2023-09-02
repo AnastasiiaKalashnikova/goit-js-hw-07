@@ -27,6 +27,7 @@ gallertList.insertAdjacentHTML('beforeend', markup.join(''))
 
 gallertList.addEventListener('click', onClick);
 
+
 function onClick(evt) {
     evt.preventDefault()
     if (!evt.target.classList.contains('gallery__image')) {
@@ -37,5 +38,18 @@ function onClick(evt) {
     <img src="${evt.target.dataset.source}" width="800" height="600">
 `)
     instance.show()
-    return 
+    
+}
+
+// Не працює, бо іистанс - локальна змінна. Як зробити, щоб працювало, придумати не виходить??? //
+document.addEventListener('keydown', toClose)
+
+function toClose(evt) {
+
+    if (!basicLightbox.visible()) {
+        return
+    }
+    if (evt.code === "Escape") {
+        instance.close() 
+    }
 }
