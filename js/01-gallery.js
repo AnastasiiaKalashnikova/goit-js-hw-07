@@ -36,15 +36,12 @@ function onClick(evt) {
 
     const instance = basicLightbox.create(`
     <img src="${evt.target.dataset.source}" width="800" height="600">
-`)
-    instance.show()
-    
-}
+`, { onShow: (instance) => {document.addEventListener('keydown', toClose)},
+	   onClose: (instance) => {document.removeEventListener('keydown', toClose)}
+})
+  instance.show();
 
-// Не працює, бо іистанс - локальна змінна. Як зробити, щоб працювало, придумати не виходить??? //
-document.addEventListener('keydown', toClose)
-
-function toClose(evt) {
+  function toClose(evt) {
 
     if (!basicLightbox.visible()) {
         return
@@ -53,3 +50,7 @@ function toClose(evt) {
         instance.close() 
     }
 }
+}
+
+
+
